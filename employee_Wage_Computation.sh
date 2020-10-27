@@ -1,26 +1,29 @@
 #!/bin/bash 
 isparttime=1;
 isfulltime=2;
-maxhrspermonth=10;
+maxhrspermonth=4;
 emprateperhr=20;
 numworkingdays=20;
 totalemphr=0;
 totalworkingdays=0;
-while [[ $totalemphr -lt $maxhrspermonth && $totalworkingdays -lt $numworkingdays ]]
-do
-	{(totalworkingdays++)}
-	empcheck=$((RANDOM%3));
-		case $empcheck in
-			$isfulltime)
-				emphrs=8
-				;;
-			$isparttime)
-				emphrs=4
-				;;
-			*)
-			emphrs=0
-				;;
-		esac
-		totalemphrs=$({$totalemphrs+$emphrs})
-done
-totalsalary=$[{$totalemphrs*$emprateperhr }];
+function getworkinghours{} {
+	case $1 in
+		$isfulltime)
+       		workinghours=8
+		;;
+		$isparttime)
+		workinghourd=4
+		;;
+		*)
+		workinghours=0
+		;;
+	esac
+	echo $workhours
+	}
+	while [[ $totalworkhours -lt $maxhrspermonth && $totalworkingdays -lt $numworkingdays ]]
+	do
+		((totalworkingdays++))
+		workhours="${ getworkinghours+ $((RANDOM%3)) }"
+		totalworkhours=$(($totalworkhours + $workinghours))
+	done
+totalsalary=$(($totalworkhours*$emprateperhr ));
